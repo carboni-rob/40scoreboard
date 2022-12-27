@@ -1,18 +1,16 @@
 {
   "name": "scoreboard",
   "version": "0.1.0",
-  "homepage": "https://carboni-rob.github.io/scoreboard",
   "private": true,
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build",
-    "typecheck": "tsc -b",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@prisma/client": "^4.8.0",
     "@remix-run/node": "^1.9.0",
     "@remix-run/react": "^1.9.0",
     "@remix-run/serve": "^1.9.0",
@@ -26,7 +24,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.27.0",
-    "gh-pages": "^4.0.0",
+    "prisma": "^4.8.0",
     "typescript": "^4.8.4"
   },
   "engines": {
