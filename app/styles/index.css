@@ -46,6 +46,14 @@ body {
   width: 100%;
 }
 
+.smallRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 h1 {
   margin: 0;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.75);
