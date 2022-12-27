@@ -1,14 +1,16 @@
 # base node image
 FROM node:16-bullseye-slim as base
 
+# set for base and all layer that inherit from it
+ENV NODE_ENV production
+
 # Install openssl for Prisma
-RUN apt-get update && apt-get install -y openssl
+RUN apt-get update && apt-get install -y openssl sqlite3
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
 
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /scoreboard
 
 ADD package.json package-lock.json ./
 RUN npm install --production=false
@@ -16,24 +18,19 @@ RUN npm install --production=false
 # Setup production node_modules
 FROM base as production-deps
 
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /scoreboard
 
-COPY --from=deps /app/node_modules /app/node_modules
+COPY --from=deps /scoreboard/node_modules /scoreboard/node_modules
 ADD package.json package-lock.json ./
 RUN npm prune --production
 
 # Build the app
 FROM base as build
 
-ENV NODE_ENV=production
+WORKDIR /scoreboard
 
-RUN mkdir /app
-WORKDIR /app
+COPY --from=deps /scoreboard/node_modules /scoreboard/node_modules
 
-COPY --from=deps /app/node_modules /app/node_modules
-
-# If we're using Prisma, uncomment to cache the prisma schema
 ADD prisma .
 RUN npx prisma generate
 
@@ -43,18 +40,20 @@ RUN npm run build
 # Finally, build the production image with minimal footprint
 FROM base
 
-ENV NODE_ENV=production
+ENV DATABASE_URL=file:/data/sqlite.db
+ENV PORT="8080"
+ENV NODE_ENV="production"
 
-RUN mkdir /app
-WORKDIR /app
+# add shortcut for connecting to database CLI
+RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
 
-COPY --from=production-deps /app/node_modules /app/node_modules
+WORKDIR /scoreboard
 
-# Uncomment if using Prisma
-COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
+COPY --from=production-deps /scoreboard/node_modules /scoreboard/node_modules
+COPY --from=build /scoreboard/node_modules/.prisma /scoreboard/node_modules/.prisma
 
-COPY --from=build /app/build /app/build
-COPY --from=build /app/public /app/public
+COPY --from=build /scoreboard/build /scoreboard/build
+COPY --from=build /scoreboard/public /scoreboard/public
 ADD . .
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
