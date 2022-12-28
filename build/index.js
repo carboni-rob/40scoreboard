@@ -181,9 +181,9 @@ function App() {
   }, this);
 }
 
-// app/routes/index.tsx
-var routes_exports = {};
-__export(routes_exports, {
+// app/routes/scoreboard.tsx
+var scoreboard_exports = {};
+__export(scoreboard_exports, {
   default: () => Index,
   links: () => links2
 });
@@ -192,7 +192,7 @@ var import_react3 = require("react");
 // app/styles/index.css
 var styles_default = "/build/_assets/index-JOA5AYKH.css";
 
-// app/routes/index.tsx
+// app/routes/scoreboard.tsx
 var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), links2 = () => [{ rel: "stylesheet", href: styles_default }];
 function Index() {
   let [daniScore, setDaniScore] = (0, import_react3.useState)(0), [daniNewScore, setDaniNewScore] = (0, import_react3.useState)(0), [robScore, setRobScore] = (0, import_react3.useState)(0), [robNewScore, setRobNewScore] = (0, import_react3.useState)(0), [daniDeals, setDaniDeals] = (0, import_react3.useState)(!0), formRef = (0, import_react3.useRef)(null), daniRef = (0, import_react3.useRef)(null), robRef = (0, import_react3.useRef)(null);
@@ -235,39 +235,39 @@ function Index() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }, className: "content", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "header", children: "Scoreboard" }, void 0, !1, {
-        fileName: "app/routes/index.tsx",
+        fileName: "app/routes/scoreboard.tsx",
         lineNumber: 73,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: daniDeals ? "" : "hidden", children: "\u{1F0CF}" }, void 0, !1, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 76,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: daniDeals ? "hidden" : "", children: "\u{1F0CF}" }, void 0, !1, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 77,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
-        fileName: "app/routes/index.tsx",
+        fileName: "app/routes/scoreboard.tsx",
         lineNumber: 75,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Dani" }, void 0, !1, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 81,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Rob" }, void 0, !1, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 82,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
-        fileName: "app/routes/index.tsx",
+        fileName: "app/routes/scoreboard.tsx",
         lineNumber: 80,
         columnNumber: 9
       }, this),
@@ -276,7 +276,7 @@ function Index() {
           daniScore,
           " "
         ] }, void 0, !0, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 86,
           columnNumber: 11
         }, this),
@@ -284,12 +284,12 @@ function Index() {
           robScore,
           " "
         ] }, void 0, !0, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 87,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
-        fileName: "app/routes/index.tsx",
+        fileName: "app/routes/scoreboard.tsx",
         lineNumber: 85,
         columnNumber: 9
       }, this),
@@ -307,7 +307,7 @@ function Index() {
             void 0,
             !1,
             {
-              fileName: "app/routes/index.tsx",
+              fileName: "app/routes/scoreboard.tsx",
               lineNumber: 92,
               columnNumber: 13
             },
@@ -325,14 +325,14 @@ function Index() {
             void 0,
             !1,
             {
-              fileName: "app/routes/index.tsx",
+              fileName: "app/routes/scoreboard.tsx",
               lineNumber: 99,
               columnNumber: 13
             },
             this
           )
         ] }, void 0, !0, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 91,
           columnNumber: 11
         }, this),
@@ -350,13 +350,13 @@ function Index() {
             void 0,
             !1,
             {
-              fileName: "app/routes/index.tsx",
+              fileName: "app/routes/scoreboard.tsx",
               lineNumber: 110,
               columnNumber: 15
             },
             this
           ) }, void 0, !1, {
-            fileName: "app/routes/index.tsx",
+            fileName: "app/routes/scoreboard.tsx",
             lineNumber: 109,
             columnNumber: 13
           }, this),
@@ -373,50 +373,78 @@ function Index() {
             void 0,
             !1,
             {
-              fileName: "app/routes/index.tsx",
+              fileName: "app/routes/scoreboard.tsx",
               lineNumber: 122,
               columnNumber: 15
             },
             this
           ) }, void 0, !1, {
-            fileName: "app/routes/index.tsx",
+            fileName: "app/routes/scoreboard.tsx",
             lineNumber: 121,
             columnNumber: 13
           }, this)
         ] }, void 0, !0, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 108,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleUpdate, children: "Update" }, void 0, !1, {
-          fileName: "app/routes/index.tsx",
+          fileName: "app/routes/scoreboard.tsx",
           lineNumber: 135,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
-        fileName: "app/routes/index.tsx",
+        fileName: "app/routes/scoreboard.tsx",
         lineNumber: 90,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
-      fileName: "app/routes/index.tsx",
+      fileName: "app/routes/scoreboard.tsx",
       lineNumber: 72,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleReset, children: "Reset" }, void 0, !1, {
-      fileName: "app/routes/index.tsx",
+      fileName: "app/routes/scoreboard.tsx",
       lineNumber: 141,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/routes/index.tsx",
+    fileName: "app/routes/scoreboard.tsx",
     lineNumber: 71,
     columnNumber: 5
   }, this);
 }
 
+// app/routes/index.tsx
+var routes_exports = {};
+__export(routes_exports, {
+  default: () => IndexRoute,
+  links: () => links3
+});
+var import_react4 = require("@remix-run/react");
+var import_jsx_dev_runtime4 = require("react/jsx-dev-runtime"), links3 = () => [{ rel: "stylesheet", href: styles_default }];
+function IndexRoute() {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "content", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react4.Link, { to: "scoreboard", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("button", { className: "button", children: "Scoreboard" }, void 0, !1, {
+    fileName: "app/routes/index.tsx",
+    lineNumber: 15,
+    columnNumber: 11
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/index.tsx",
+    lineNumber: 14,
+    columnNumber: 9
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/index.tsx",
+    lineNumber: 13,
+    columnNumber: 7
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/index.tsx",
+    lineNumber: 12,
+    columnNumber: 5
+  }, this);
+}
+
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "9a135cdd", entry: { module: "/build/entry.client-77URNK4O.js", imports: ["/build/_shared/chunk-N5T4ZSWI.js", "/build/_shared/chunk-XSU5LKHK.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-YFMNAZCM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VZHCAGFC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-9A135CDD.js" };
+var assets_manifest_default = { version: "500a6b4b", entry: { module: "/build/entry.client-DG5WMBNX.js", imports: ["/build/_shared/chunk-JZ4Q2KBB.js", "/build/_shared/chunk-XSU5LKHK.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-454UMAWP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-NYKU7PU2.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/scoreboard": { id: "routes/scoreboard", parentId: "root", path: "scoreboard", index: void 0, caseSensitive: void 0, module: "/build/routes/scoreboard-HLXYOC63.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-500A6B4B.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
@@ -427,6 +455,14 @@ var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath 
     index: void 0,
     caseSensitive: void 0,
     module: root_exports
+  },
+  "routes/scoreboard": {
+    id: "routes/scoreboard",
+    parentId: "root",
+    path: "scoreboard",
+    index: void 0,
+    caseSensitive: void 0,
+    module: scoreboard_exports
   },
   "routes/index": {
     id: "routes/index",
