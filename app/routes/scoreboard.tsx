@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LinksFunction } from "@remix-run/node";
+import { useLocalStorage } from "~/utils/useLocalStorage";
 
 import stylesUrl from "~/styles/index.css";
 
@@ -26,19 +27,16 @@ export default function Index() {
   const [daniDeals, setDaniDeals] = useState(true);
   const [hands, setHands] = useState<Score[]>([]);
 
+  const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
+
   const formRef = useRef<HTMLFormElement>(null);
   const daniRef = useRef<HTMLInputElement>(null);
   const robRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    try {
-      const score = JSON.parse(localStorage.getItem("score") ?? "{}");
-      setDaniScore(score.daniScore ?? 0);
-      setRobScore(score.robScore ?? 0);
-      setHands(score.hands ?? []);
-    } catch (error) {
-      console.error(error);
-    }
+    setDaniScore(data.daniScore ?? 0);
+    setRobScore(data.robScore ?? 0);
+    setHands(data.hands ?? []);
   }, []);
 
   const handleUpdate = (e: React.FormEvent<HTMLButtonElement>) => {
@@ -48,19 +46,11 @@ export default function Index() {
     const updatedRobScore = robScore + (robNewScore ?? 0);
     const updatedHands = [...hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
 
-    try {
-      localStorage.setItem(
-        "score",
-        JSON.stringify({
-          daniScore: updatedDaniScore,
-          robScore: updatedDaniScore,
-          hands: updatedHands,
-        })
-      );
-    } catch (error) {
-      console.error(error);
-      return;
-    }
+    setInLocalStorage({
+      daniScore: updatedDaniScore,
+      robScore: updatedDaniScore,
+      hands: updatedHands,
+    });
     setDaniScore(updatedDaniScore);
     setRobScore(updatedRobScore);
     setDaniNewScore(0);
@@ -73,16 +63,8 @@ export default function Index() {
   const handleReset = () => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
-    try {
-      localStorage.setItem(
-        "score",
-        JSON.stringify({ daniScore: 0, robScore: 0, hands: [{ daniScore: 0, robScore: 0 }] })
-      );
-    } catch (error) {
-      console.error(error);
-      return;
-    }
 
+    setInLocalStorage({ daniScore: 0, robScore: 0, hands: [{ daniScore: 0, robScore: 0 }] });
     setDaniScore(0);
     setRobScore(0);
     setDaniNewScore(0);
