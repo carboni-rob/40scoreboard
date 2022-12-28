@@ -34,7 +34,7 @@ var entry_server_exports = {};
 __export(entry_server_exports, {
   default: () => handleRequest
 });
-var import_stream = require("stream"), import_node = require("@remix-run/node"), import_react = require("@remix-run/react"), import_isbot = __toESM(require("isbot")), import_server = require("react-dom/server"), import_jsx_runtime = require("react/jsx-runtime"), ABORT_DELAY = 5e3;
+var import_stream = require("stream"), import_node = require("@remix-run/node"), import_react = require("@remix-run/react"), import_isbot = __toESM(require("isbot")), import_server = require("react-dom/server"), import_jsx_dev_runtime = require("react/jsx-dev-runtime"), ABORT_DELAY = 5e3;
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return (0, import_isbot.default)(request.headers.get("user-agent")) ? handleBotRequest(
     request,
@@ -51,7 +51,11 @@ function handleRequest(request, responseStatusCode, responseHeaders, remixContex
 function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return new Promise((resolve, reject) => {
     let didError = !1, { pipe, abort } = (0, import_server.renderToPipeableStream)(
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.RemixServer, { context: remixContext, url: request.url }),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react.RemixServer, { context: remixContext, url: request.url }, void 0, !1, {
+        fileName: "app/entry.server.tsx",
+        lineNumber: 41,
+        columnNumber: 7
+      }, this),
       {
         onAllReady() {
           let body = new import_stream.PassThrough();
@@ -76,7 +80,11 @@ function handleBotRequest(request, responseStatusCode, responseHeaders, remixCon
 function handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return new Promise((resolve, reject) => {
     let didError = !1, { pipe, abort } = (0, import_server.renderToPipeableStream)(
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.RemixServer, { context: remixContext, url: request.url }),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react.RemixServer, { context: remixContext, url: request.url }, void 0, !1, {
+        fileName: "app/entry.server.tsx",
+        lineNumber: 82,
+        columnNumber: 7
+      }, this),
       {
         onShellReady() {
           let body = new import_stream.PassThrough();
@@ -109,10 +117,10 @@ __export(root_exports, {
 var import_react2 = require("@remix-run/react");
 
 // app/styles/global.css
-var global_default = "/build/_assets/global-P7URZDJP.css";
+var global_default = "/build/_assets/global-X42EWOC3.css";
 
 // app/root.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime"), links = () => [
+var import_jsx_dev_runtime2 = require("react/jsx-dev-runtime"), links = () => [
   {
     rel: "stylesheet",
     href: global_default
@@ -123,18 +131,54 @@ var import_jsx_runtime2 = require("react/jsx-runtime"), links = () => [
   viewport: "width=device-width,initial-scale=1"
 });
 function App() {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("html", { lang: "en", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("head", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Meta, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Links, {})
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("body", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Outlet, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.ScrollRestoration, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Scripts, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.LiveReload, {})
-    ] })
-  ] });
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("html", { lang: "en", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("head", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Meta, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 24,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Links, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 25,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/root.tsx",
+      lineNumber: 23,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("body", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Outlet, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 28,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.ScrollRestoration, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 29,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Scripts, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 30,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.LiveReload, {}, void 0, !1, {
+        fileName: "app/root.tsx",
+        lineNumber: 31,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/root.tsx",
+      lineNumber: 27,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/root.tsx",
+    lineNumber: 22,
+    columnNumber: 5
+  }, this);
 }
 
 // app/routes/index.tsx
@@ -146,12 +190,12 @@ __export(routes_exports, {
 var import_react3 = require("react");
 
 // app/styles/index.css
-var styles_default = "/build/_assets/index-NAG2CEC7.css";
+var styles_default = "/build/_assets/index-JOA5AYKH.css";
 
 // app/routes/index.tsx
-var import_jsx_runtime3 = require("react/jsx-runtime"), links2 = () => [{ rel: "stylesheet", href: styles_default }];
+var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), links2 = () => [{ rel: "stylesheet", href: styles_default }];
 function Index() {
-  let [daniScore, setDaniScore] = (0, import_react3.useState)(0), [daniNewScore, setDaniNewScore] = (0, import_react3.useState)(0), [robScore, setRobScore] = (0, import_react3.useState)(0), [robNewScore, setRobNewScore] = (0, import_react3.useState)(0), formRef = (0, import_react3.useRef)(null), daniRef = (0, import_react3.useRef)(null), robRef = (0, import_react3.useRef)(null);
+  let [daniScore, setDaniScore] = (0, import_react3.useState)(0), [daniNewScore, setDaniNewScore] = (0, import_react3.useState)(0), [robScore, setRobScore] = (0, import_react3.useState)(0), [robNewScore, setRobNewScore] = (0, import_react3.useState)(0), [daniDeals, setDaniDeals] = (0, import_react3.useState)(!0), formRef = (0, import_react3.useRef)(null), daniRef = (0, import_react3.useRef)(null), robRef = (0, import_react3.useRef)(null);
   (0, import_react3.useEffect)(() => {
     try {
       let score = JSON.parse(localStorage.getItem("score") ?? "{}");
@@ -175,7 +219,7 @@ function Index() {
       console.error(error);
       return;
     }
-    setDaniScore(daniScore + (daniNewScore ?? 0)), setRobScore(robScore + (robNewScore ?? 0)), setDaniNewScore(0), setRobNewScore(0), (_a = formRef.current) == null || _a.reset();
+    setDaniScore(daniScore + (daniNewScore ?? 0)), setRobScore(robScore + (robNewScore ?? 0)), setDaniNewScore(0), setRobNewScore(0), setDaniDeals(!daniDeals), (_a = formRef.current) == null || _a.reset();
   }, handleReset = () => {
     var _a;
     if (!!confirm("Are you sure you want to reset the scores?")) {
@@ -188,26 +232,70 @@ function Index() {
       setDaniScore(0), setRobScore(0), setDaniNewScore(0), setRobNewScore(0), (_a = formRef.current) == null || _a.reset();
     }
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "container", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }, className: "content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h1", { className: "header", children: "\u{1F0CF} Scoreboard \u{1F0CF}" }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "row", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h1", { children: "Dani" }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h1", { children: "Rob" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "row", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("h1", { children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }, className: "content", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "header", children: "Scoreboard" }, void 0, !1, {
+        fileName: "app/routes/index.tsx",
+        lineNumber: 73,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: daniDeals ? "" : "hidden", children: "\u{1F0CF}" }, void 0, !1, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 76,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: daniDeals ? "hidden" : "", children: "\u{1F0CF}" }, void 0, !1, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 77,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/index.tsx",
+        lineNumber: 75,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Dani" }, void 0, !1, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 81,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Rob" }, void 0, !1, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 82,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/index.tsx",
+        lineNumber: 80,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
           daniScore,
           " "
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("h1", { children: [
+        ] }, void 0, !0, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 86,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
           robScore,
           " "
-        ] })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("form", { ref: formRef, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "row", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+        ] }, void 0, !0, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 87,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/index.tsx",
+        lineNumber: 85,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("form", { ref: formRef, children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
             "input",
             {
               ref: daniRef,
@@ -215,9 +303,17 @@ function Index() {
               name: "daniNewScore",
               onChange: (e) => setDaniNewScore(Number(e.target.value)),
               placeholder: `${daniNewScore}`
-            }
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/index.tsx",
+              lineNumber: 92,
+              columnNumber: 13
+            },
+            this
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
             "input",
             {
               ref: robRef,
@@ -225,11 +321,23 @@ function Index() {
               name: "robNewScore",
               onChange: (e) => setRobNewScore(Number(e.target.value)),
               placeholder: "0"
-            }
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/index.tsx",
+              lineNumber: 99,
+              columnNumber: 13
+            },
+            this
           )
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "row", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+        ] }, void 0, !0, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 91,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
             "button",
             {
               className: "button",
@@ -238,9 +346,21 @@ function Index() {
                 e.preventDefault(), (_a = daniRef.current) == null || _a.stepDown(10), setDaniNewScore(Number((_b = daniRef.current) == null ? void 0 : _b.value));
               },
               children: "-10"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/index.tsx",
+              lineNumber: 110,
+              columnNumber: 15
+            },
+            this
+          ) }, void 0, !1, {
+            fileName: "app/routes/index.tsx",
+            lineNumber: 109,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
             "button",
             {
               className: "button",
@@ -249,18 +369,54 @@ function Index() {
                 e.preventDefault(), (_a = robRef.current) == null || _a.stepDown(10), setRobNewScore(Number((_b = robRef.current) == null ? void 0 : _b.value));
               },
               children: "-10"
-            }
-          )
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { className: "button", type: "submit", onClick: handleUpdate, children: "Update" })
-      ] })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { className: "button", type: "submit", onClick: handleReset, children: "Reset" })
-  ] });
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/index.tsx",
+              lineNumber: 122,
+              columnNumber: 15
+            },
+            this
+          ) }, void 0, !1, {
+            fileName: "app/routes/index.tsx",
+            lineNumber: 121,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, !0, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 108,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleUpdate, children: "Update" }, void 0, !1, {
+          fileName: "app/routes/index.tsx",
+          lineNumber: 135,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/index.tsx",
+        lineNumber: 90,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/index.tsx",
+      lineNumber: 72,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleReset, children: "Reset" }, void 0, !1, {
+      fileName: "app/routes/index.tsx",
+      lineNumber: 141,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/index.tsx",
+    lineNumber: 71,
+    columnNumber: 5
+  }, this);
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "af47e301", entry: { module: "/build/entry.client-KPOOBG5E.js", imports: ["/build/_shared/chunk-3LPGR5PY.js", "/build/_shared/chunk-JKCUYFIB.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-PTLQPDWR.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-LZUN7UOX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-AF47E301.js" };
+var assets_manifest_default = { version: "9a135cdd", entry: { module: "/build/entry.client-77URNK4O.js", imports: ["/build/_shared/chunk-N5T4ZSWI.js", "/build/_shared/chunk-XSU5LKHK.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-YFMNAZCM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VZHCAGFC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-9A135CDD.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
@@ -290,3 +446,4 @@ var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath 
   publicPath,
   routes
 });
+//# sourceMappingURL=index.js.map

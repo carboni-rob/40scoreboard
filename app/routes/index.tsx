@@ -12,6 +12,7 @@ export default function Index() {
   const [daniNewScore, setDaniNewScore] = useState(0);
   const [robScore, setRobScore] = useState(0);
   const [robNewScore, setRobNewScore] = useState(0);
+  const [daniDeals, setDaniDeals] = useState(true);
 
   const formRef = useRef<HTMLFormElement>(null);
   const daniRef = useRef<HTMLInputElement>(null);
@@ -45,6 +46,7 @@ export default function Index() {
     setRobScore(robScore + (robNewScore ?? 0));
     setDaniNewScore(0);
     setRobNewScore(0);
+    setDaniDeals(!daniDeals);
     formRef.current?.reset();
   };
 
@@ -68,15 +70,23 @@ export default function Index() {
   return (
     <div className="container">
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className="content">
-        <h1 className="header">🃏 Scoreboard 🃏</h1>
+        <h1 className="header">Scoreboard</h1>
+
+        <div className="row">
+          <h1 className={daniDeals ? "" : "hidden"}>🃏</h1>
+          <h1 className={daniDeals ? "hidden" : ""}>🃏</h1>
+        </div>
+
         <div className="row">
           <h1>Dani</h1>
           <h1>Rob</h1>
         </div>
+
         <div className="row">
           <h1>{daniScore} </h1>
           <h1>{robScore} </h1>
         </div>
+
         <form ref={formRef}>
           <div className="row">
             <input
@@ -94,27 +104,32 @@ export default function Index() {
               placeholder="0"
             />
           </div>
+
           <div className="row">
-            <button
-              className="button"
-              onClick={(e) => {
-                e.preventDefault();
-                daniRef.current?.stepDown(10);
-                setDaniNewScore(Number(daniRef.current?.value));
-              }}
-            >
-              -10
-            </button>
-            <button
-              className="button"
-              onClick={(e) => {
-                e.preventDefault();
-                robRef.current?.stepDown(10);
-                setRobNewScore(Number(robRef.current?.value));
-              }}
-            >
-              -10
-            </button>
+            <div className="row">
+              <button
+                className="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  daniRef.current?.stepDown(10);
+                  setDaniNewScore(Number(daniRef.current?.value));
+                }}
+              >
+                -10
+              </button>
+            </div>
+            <div className="row">
+              <button
+                className="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  robRef.current?.stepDown(10);
+                  setRobNewScore(Number(robRef.current?.value));
+                }}
+              >
+                -10
+              </button>
+            </div>
           </div>
 
           <button className="button" type="submit" onClick={handleUpdate}>
@@ -122,6 +137,7 @@ export default function Index() {
           </button>
         </form>
       </div>
+
       <button className="button" type="submit" onClick={handleReset}>
         Reset
       </button>

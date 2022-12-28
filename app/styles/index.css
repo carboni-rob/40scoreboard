@@ -54,6 +54,10 @@ body {
   width: 100%;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 h1 {
   margin: 0;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.75);
