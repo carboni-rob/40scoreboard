@@ -10,22 +10,27 @@ type Score = {
 };
 
 type Scores = {
+  daniDeals: boolean;
   daniScore: number;
   robScore: number;
   hands: Score[];
+};
+
+const initialState: Scores = {
+  daniDeals: true,
+  daniScore: 0,
+  robScore: 0,
+  hands: [{ daniScore: 0, robScore: 0 }],
 };
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-export default function Index() {
-  const [daniScore, setDaniScore] = useState(0);
+export default function Scoreboard() {
+  const [state, setState] = useState<Scores>(initialState);
   const [daniNewScore, setDaniNewScore] = useState(0);
-  const [robScore, setRobScore] = useState(0);
   const [robNewScore, setRobNewScore] = useState(0);
-  const [daniDeals, setDaniDeals] = useState(true);
-  const [hands, setHands] = useState<Score[]>([]);
 
   const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
 
@@ -34,29 +39,26 @@ export default function Index() {
   const robRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setDaniScore(data.daniScore ?? 0);
-    setRobScore(data.robScore ?? 0);
-    setHands(data.hands ?? []);
-  }, []);
+    if (!data) return;
+    setState(data);
+  }, [data]);
 
   const handleUpdate = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const updatedDaniScore = daniScore + (daniNewScore ?? 0);
-    const updatedRobScore = robScore + (robNewScore ?? 0);
-    const updatedHands = [...hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
+    const updatedDaniScore = state?.daniScore + (daniNewScore ?? 0);
+    const updatedRobScore = state.robScore + (robNewScore ?? 0);
+    const updatedHands = [...state.hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
 
     setInLocalStorage({
+      daniDeals: !state.daniDeals,
       daniScore: updatedDaniScore,
       robScore: updatedDaniScore,
       hands: updatedHands,
     });
-    setDaniScore(updatedDaniScore);
-    setRobScore(updatedRobScore);
+
     setDaniNewScore(0);
     setRobNewScore(0);
-    setDaniDeals(!daniDeals);
-    setHands(updatedHands);
     formRef.current?.reset();
   };
 
@@ -64,12 +66,9 @@ export default function Index() {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
 
-    setInLocalStorage({ daniScore: 0, robScore: 0, hands: [{ daniScore: 0, robScore: 0 }] });
-    setDaniScore(0);
-    setRobScore(0);
+    setInLocalStorage(initialState);
     setDaniNewScore(0);
     setRobNewScore(0);
-    setHands([]);
     formRef.current?.reset();
   };
 
@@ -79,8 +78,8 @@ export default function Index() {
         <h1 className="header">Scoreboard</h1>
 
         <div className="row">
-          <h1 className={daniDeals ? "" : "hidden"}>🃏</h1>
-          <h1 className={daniDeals ? "hidden" : ""}>🃏</h1>
+          <h1 className={state.daniDeals ? "" : "hidden"}>🃏</h1>
+          <h1 className={state.daniDeals ? "hidden" : ""}>🃏</h1>
         </div>
 
         <div className="row">
@@ -89,8 +88,8 @@ export default function Index() {
         </div>
 
         <div className="row">
-          <h1>{daniScore} </h1>
-          <h1>{robScore} </h1>
+          <h1>{state.daniScore} </h1>
+          <h1>{state.robScore} </h1>
         </div>
 
         <form ref={formRef}>
