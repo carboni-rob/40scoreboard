@@ -3,6 +3,17 @@ import { LinksFunction } from "@remix-run/node";
 
 import stylesUrl from "~/styles/index.css";
 
+type Score = {
+  daniScore: number;
+  robScore: number;
+};
+
+type Scores = {
+  daniScore: number;
+  robScore: number;
+  hands: Score[];
+};
+
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
@@ -13,6 +24,7 @@ export default function Index() {
   const [robScore, setRobScore] = useState(0);
   const [robNewScore, setRobNewScore] = useState(0);
   const [daniDeals, setDaniDeals] = useState(true);
+  const [hands, setHands] = useState<Score[]>([]);
 
   const formRef = useRef<HTMLFormElement>(null);
   const daniRef = useRef<HTMLInputElement>(null);
@@ -23,6 +35,7 @@ export default function Index() {
       const score = JSON.parse(localStorage.getItem("score") ?? "{}");
       setDaniScore(score.daniScore ?? 0);
       setRobScore(score.robScore ?? 0);
+      setHands(score.hands ?? []);
     } catch (error) {
       console.error(error);
     }
@@ -30,31 +43,41 @@ export default function Index() {
 
   const handleUpdate = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    const updatedDaniScore = daniScore + (daniNewScore ?? 0);
+    const updatedRobScore = robScore + (robNewScore ?? 0);
+    const updatedHands = [...hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
+
     try {
       localStorage.setItem(
         "score",
         JSON.stringify({
-          daniScore: daniScore + (daniNewScore ?? 0),
-          robScore: robScore + (robNewScore ?? 0),
+          daniScore: updatedDaniScore,
+          robScore: updatedDaniScore,
+          hands: updatedHands,
         })
       );
     } catch (error) {
       console.error(error);
       return;
     }
-    setDaniScore(daniScore + (daniNewScore ?? 0));
-    setRobScore(robScore + (robNewScore ?? 0));
+    setDaniScore(updatedDaniScore);
+    setRobScore(updatedRobScore);
     setDaniNewScore(0);
     setRobNewScore(0);
     setDaniDeals(!daniDeals);
+    setHands(updatedHands);
     formRef.current?.reset();
   };
 
   const handleReset = () => {
-    const confirmReset = confirm("Are you sure you want to reset the scores?");
+    const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
     try {
-      localStorage.setItem("score", JSON.stringify({ daniScore: 0, robScore: 0 }));
+      localStorage.setItem(
+        "score",
+        JSON.stringify({ daniScore: 0, robScore: 0, hands: [{ daniScore: 0, robScore: 0 }] })
+      );
     } catch (error) {
       console.error(error);
       return;
@@ -64,6 +87,7 @@ export default function Index() {
     setRobScore(0);
     setDaniNewScore(0);
     setRobNewScore(0);
+    setHands([]);
     formRef.current?.reset();
   };
 
