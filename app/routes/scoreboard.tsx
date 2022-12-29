@@ -3,7 +3,7 @@ import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
 import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/index.css";
-import { useSubmit } from "@remix-run/react";
+import { Form, useSubmit } from "@remix-run/react";
 
 type Score = {
   daniScore: number;
@@ -47,6 +47,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
+  const { daniDeals, daniScore, robScore } = state;
   const [daniNewScore, setDaniNewScore] = useState(0);
   const [robNewScore, setRobNewScore] = useState(0);
 
@@ -77,12 +78,11 @@ export default function Scoreboard() {
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
+    submit(e.currentTarget);
 
     setInLocalStorage(initialState);
     setDaniNewScore(0);
     setRobNewScore(0);
-
-    submit(e.currentTarget);
   };
 
   return (
@@ -91,8 +91,8 @@ export default function Scoreboard() {
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className="content">
         <div>
           <div className="row">
-            <h1 className={state.daniDeals ? "" : "hidden"}>🃏</h1>
-            <h1 className={state.daniDeals ? "hidden" : ""}>🃏</h1>
+            <h1 className={daniDeals ? "" : "hidden"}>🃏</h1>
+            <h1 className={daniDeals ? "hidden" : ""}>🃏</h1>
           </div>
 
           <div className="row">
@@ -101,8 +101,8 @@ export default function Scoreboard() {
           </div>
 
           <div className="row">
-            <h1>{state.daniScore} </h1>
-            <h1>{state.robScore} </h1>
+            <h1>{daniScore} </h1>
+            <h1>{robScore} </h1>
           </div>
 
           <div className="row">
@@ -150,13 +150,13 @@ export default function Scoreboard() {
         </button>
       </div>
 
-      <form method="post" onSubmit={handleReset}>
-        <input type="hidden" name="robScore" value={`${state.robScore}`} />
-        <input type="hidden" name="daniScore" value={`${state.daniScore}`} />
+      <Form method="post" onSubmit={handleReset}>
+        <input type="hidden" name="robScore" value={robScore} />
+        <input type="hidden" name="daniScore" value={daniScore} />
         <button className="button" type="submit">
           Archive & Reset
         </button>
-      </form>
+      </Form>
     </div>
   );
 }
