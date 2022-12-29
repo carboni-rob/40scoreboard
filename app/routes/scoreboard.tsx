@@ -48,8 +48,8 @@ export const action = async ({ request }: ActionArgs) => {
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
   const { daniDeals, daniScore, robScore } = state;
-  const [daniNewScore, setDaniNewScore] = useState(0);
-  const [robNewScore, setRobNewScore] = useState(0);
+  const [daniNewScore, setDaniNewScore] = useState<number | undefined>();
+  const [robNewScore, setRobNewScore] = useState<number | undefined>();
 
   const submit = useSubmit();
   const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
@@ -71,8 +71,8 @@ export default function Scoreboard() {
       hands: updatedHands,
     });
 
-    setDaniNewScore(0);
-    setRobNewScore(0);
+    setDaniNewScore(undefined);
+    setRobNewScore(undefined);
   };
 
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
@@ -81,8 +81,8 @@ export default function Scoreboard() {
     submit(e.currentTarget);
 
     setInLocalStorage(initialState);
-    setDaniNewScore(0);
-    setRobNewScore(0);
+    setDaniNewScore(undefined);
+    setRobNewScore(undefined);
   };
 
   return (
@@ -109,19 +109,21 @@ export default function Scoreboard() {
             <input
               type="number"
               name="daniNewScore"
-              value={daniNewScore}
+              value={daniNewScore ?? ""}
               onChange={(e) => setDaniNewScore(Number(e.target.value))}
+              placeholder="0"
             />
             <input
               type="number"
               name="robNewScore"
-              value={robNewScore}
+              value={robNewScore ?? ""}
               onChange={(e) => setRobNewScore(Number(e.target.value))}
+              placeholder="0"
             />
           </div>
 
           <div className="row">
-            <div className="row">
+            <div className="smallRow">
               <button
                 className="button"
                 onClick={() => {
@@ -130,9 +132,17 @@ export default function Scoreboard() {
               >
                 -10
               </button>
+              <button
+                className="button"
+                onClick={() => {
+                  setDaniNewScore(100);
+                }}
+              >
+                100
+              </button>
             </div>
 
-            <div className="row">
+            <div className="smallRow">
               <button
                 className="button"
                 onClick={() => {
@@ -140,6 +150,14 @@ export default function Scoreboard() {
                 }}
               >
                 -10
+              </button>
+              <button
+                className="button"
+                onClick={() => {
+                  setRobNewScore(100);
+                }}
+              >
+                100
               </button>
             </div>
           </div>
