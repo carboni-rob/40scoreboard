@@ -47,7 +47,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
-  const { daniDeals, daniScore, robScore } = state;
+  const { daniDeals, daniScore, robScore, hands } = state;
   const [daniNewScore, setDaniNewScore] = useState<number | undefined>();
   const [robNewScore, setRobNewScore] = useState<number | undefined>();
 
@@ -60,12 +60,12 @@ export default function Scoreboard() {
   }, [data]);
 
   const handleUpdate = () => {
-    const updatedDaniScore = state?.daniScore + (daniNewScore ?? 0);
-    const updatedRobScore = state.robScore + (robNewScore ?? 0);
-    const updatedHands = [...state.hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
+    const updatedDaniScore = daniScore + (daniNewScore ?? 0);
+    const updatedRobScore = robScore + (robNewScore ?? 0);
+    const updatedHands = [...(hands || []), { daniScore: updatedDaniScore, robScore: updatedRobScore }];
 
     setInLocalStorage({
-      daniDeals: !state.daniDeals,
+      daniDeals: !daniDeals,
       daniScore: updatedDaniScore,
       robScore: updatedRobScore,
       hands: updatedHands,
