@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
 import { db } from "~/utils/db.server";
@@ -38,6 +38,8 @@ export const action = async ({ request }: ActionArgs) => {
     dani: Number(daniScore),
   };
 
+  console.log(data);
+
   await db.game.create({ data });
 
   return null;
@@ -51,18 +53,12 @@ export default function Scoreboard() {
   const submit = useSubmit();
   const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const daniRef = useRef<HTMLInputElement>(null);
-  const robRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     if (!data) return;
     setState(data);
   }, [data]);
 
-  const handleUpdate = (e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleUpdate = () => {
     const updatedDaniScore = state?.daniScore + (daniNewScore ?? 0);
     const updatedRobScore = state.robScore + (robNewScore ?? 0);
     const updatedHands = [...state.hands, { daniScore: updatedDaniScore, robScore: updatedRobScore }];
@@ -70,13 +66,12 @@ export default function Scoreboard() {
     setInLocalStorage({
       daniDeals: !state.daniDeals,
       daniScore: updatedDaniScore,
-      robScore: updatedDaniScore,
+      robScore: updatedRobScore,
       hands: updatedHands,
     });
 
     setDaniNewScore(0);
     setRobNewScore(0);
-    formRef.current?.reset();
   };
 
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
@@ -86,45 +81,42 @@ export default function Scoreboard() {
     setInLocalStorage(initialState);
     setDaniNewScore(0);
     setRobNewScore(0);
-    formRef.current?.reset();
+
     submit(e.currentTarget);
   };
 
   return (
-    <div className="container">
+    <div className="page">
+      <h1 className="header">Scoreboard</h1>
       <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className="content">
-        <h1 className="header">Scoreboard</h1>
+        <div>
+          <div className="row">
+            <h1 className={state.daniDeals ? "" : "hidden"}>🃏</h1>
+            <h1 className={state.daniDeals ? "hidden" : ""}>🃏</h1>
+          </div>
 
-        <div className="row">
-          <h1 className={state.daniDeals ? "" : "hidden"}>🃏</h1>
-          <h1 className={state.daniDeals ? "hidden" : ""}>🃏</h1>
-        </div>
+          <div className="row">
+            <h1>Dani</h1>
+            <h1>Rob</h1>
+          </div>
 
-        <div className="row">
-          <h1>Dani</h1>
-          <h1>Rob</h1>
-        </div>
+          <div className="row">
+            <h1>{state.daniScore} </h1>
+            <h1>{state.robScore} </h1>
+          </div>
 
-        <div className="row">
-          <h1>{state.daniScore} </h1>
-          <h1>{state.robScore} </h1>
-        </div>
-
-        <form ref={formRef} method="post" onSubmit={handleReset}>
           <div className="row">
             <input
-              ref={daniRef}
               type="number"
               name="daniNewScore"
+              value={daniNewScore}
               onChange={(e) => setDaniNewScore(Number(e.target.value))}
-              placeholder={`${daniNewScore}`}
             />
             <input
-              ref={robRef}
               type="number"
               name="robNewScore"
+              value={robNewScore}
               onChange={(e) => setRobNewScore(Number(e.target.value))}
-              placeholder="0"
             />
           </div>
 
@@ -132,41 +124,39 @@ export default function Scoreboard() {
             <div className="row">
               <button
                 className="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  daniRef.current?.stepDown(10);
-                  setDaniNewScore(Number(daniRef.current?.value));
+                onClick={() => {
+                  setDaniNewScore(-10);
                 }}
               >
                 -10
               </button>
             </div>
+
             <div className="row">
               <button
                 className="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  robRef.current?.stepDown(10);
-                  setRobNewScore(Number(robRef.current?.value));
+                onClick={() => {
+                  setRobNewScore(-10);
                 }}
               >
                 -10
               </button>
             </div>
           </div>
+        </div>
 
-          <input type="hidden" name="robScore" value={`${state.robScore}`} />
-          <input type="hidden" name="daniScore" value={`${state.daniScore}`} />
-
-          <button className="button" onClick={handleUpdate}>
-            Update
-          </button>
-
-          <button className="button" type="submit">
-            Archive & Reset
-          </button>
-        </form>
+        <button className="button" onClick={handleUpdate}>
+          Update
+        </button>
       </div>
+
+      <form method="post" onSubmit={handleReset}>
+        <input type="hidden" name="robScore" value={`${state.robScore}`} />
+        <input type="hidden" name="daniScore" value={`${state.daniScore}`} />
+        <button className="button" type="submit">
+          Archive & Reset
+        </button>
+      </form>
     </div>
   );
 }
