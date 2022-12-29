@@ -184,6 +184,7 @@ function App() {
 // app/routes/scoreboard.tsx
 var scoreboard_exports = {};
 __export(scoreboard_exports, {
+  action: () => action,
   default: () => Scoreboard,
   links: () => links2
 });
@@ -201,18 +202,28 @@ function useLocalStorage(key) {
   } };
 }
 
+// app/utils/db.server.ts
+var import_client = require("@prisma/client"), db;
+global.__db || (global.__db = new import_client.PrismaClient()), db = global.__db;
+
 // app/styles/index.css
 var styles_default = "/build/_assets/index-JOA5AYKH.css";
 
 // app/routes/scoreboard.tsx
-var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), initialState = {
+var import_react5 = require("@remix-run/react"), import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), initialState = {
   daniDeals: !0,
   daniScore: 0,
   robScore: 0,
   hands: [{ daniScore: 0, robScore: 0 }]
-}, links2 = () => [{ rel: "stylesheet", href: styles_default }];
+}, links2 = () => [{ rel: "stylesheet", href: styles_default }], action = async ({ request }) => {
+  let form = await request.formData(), robScore = form.get("robScore"), daniScore = form.get("daniScore"), data = {
+    rob: Number(robScore),
+    dani: Number(daniScore)
+  };
+  return await db.game.create({ data }), null;
+};
 function Scoreboard() {
-  let [state, setState] = (0, import_react4.useState)(initialState), [daniNewScore, setDaniNewScore] = (0, import_react4.useState)(0), [robNewScore, setRobNewScore] = (0, import_react4.useState)(0), { data, setInLocalStorage } = useLocalStorage("score"), formRef = (0, import_react4.useRef)(null), daniRef = (0, import_react4.useRef)(null), robRef = (0, import_react4.useRef)(null);
+  let [state, setState] = (0, import_react4.useState)(initialState), [daniNewScore, setDaniNewScore] = (0, import_react4.useState)(0), [robNewScore, setRobNewScore] = (0, import_react4.useState)(0), submit = (0, import_react5.useSubmit)(), { data, setInLocalStorage } = useLocalStorage("score"), formRef = (0, import_react4.useRef)(null), daniRef = (0, import_react4.useRef)(null), robRef = (0, import_react4.useRef)(null);
   (0, import_react4.useEffect)(() => {
     !data || setState(data);
   }, [data]);
@@ -226,189 +237,197 @@ function Scoreboard() {
       robScore: updatedDaniScore,
       hands: updatedHands
     }), setDaniNewScore(0), setRobNewScore(0), (_a = formRef.current) == null || _a.reset();
-  }, handleReset = () => {
+  }, handleReset = (e) => {
     var _a;
-    !confirm("Are you sure you want to archive this game and reset the scores?") || (setInLocalStorage(initialState), setDaniNewScore(0), setRobNewScore(0), (_a = formRef.current) == null || _a.reset());
+    !confirm("Are you sure you want to archive this game and reset the scores?") || (setInLocalStorage(initialState), setDaniNewScore(0), setRobNewScore(0), (_a = formRef.current) == null || _a.reset(), submit(e.currentTarget));
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }, className: "content", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "header", children: "Scoreboard" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }, className: "content", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "header", children: "Scoreboard" }, void 0, !1, {
+      fileName: "app/routes/scoreboard.tsx",
+      lineNumber: 96,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: state.daniDeals ? "" : "hidden", children: "\u{1F0CF}" }, void 0, !1, {
         fileName: "app/routes/scoreboard.tsx",
-        lineNumber: 78,
-        columnNumber: 9
+        lineNumber: 99,
+        columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: state.daniDeals ? "" : "hidden", children: "\u{1F0CF}" }, void 0, !1, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 81,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: state.daniDeals ? "hidden" : "", children: "\u{1F0CF}" }, void 0, !1, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 82,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: state.daniDeals ? "hidden" : "", children: "\u{1F0CF}" }, void 0, !1, {
         fileName: "app/routes/scoreboard.tsx",
-        lineNumber: 80,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Dani" }, void 0, !1, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 86,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Rob" }, void 0, !1, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 87,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/scoreboard.tsx",
-        lineNumber: 85,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
-          state.daniScore,
-          " "
-        ] }, void 0, !0, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 91,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
-          state.robScore,
-          " "
-        ] }, void 0, !0, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 92,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/scoreboard.tsx",
-        lineNumber: 90,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("form", { ref: formRef, children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
-            "input",
-            {
-              ref: daniRef,
-              type: "number",
-              name: "daniNewScore",
-              onChange: (e) => setDaniNewScore(Number(e.target.value)),
-              placeholder: `${daniNewScore}`
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/routes/scoreboard.tsx",
-              lineNumber: 97,
-              columnNumber: 13
-            },
-            this
-          ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
-            "input",
-            {
-              ref: robRef,
-              type: "number",
-              name: "robNewScore",
-              onChange: (e) => setRobNewScore(Number(e.target.value)),
-              placeholder: "0"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/routes/scoreboard.tsx",
-              lineNumber: 104,
-              columnNumber: 13
-            },
-            this
-          )
-        ] }, void 0, !0, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 96,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
-            "button",
-            {
-              className: "button",
-              onClick: (e) => {
-                var _a, _b;
-                e.preventDefault(), (_a = daniRef.current) == null || _a.stepDown(10), setDaniNewScore(Number((_b = daniRef.current) == null ? void 0 : _b.value));
-              },
-              children: "-10"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/routes/scoreboard.tsx",
-              lineNumber: 115,
-              columnNumber: 15
-            },
-            this
-          ) }, void 0, !1, {
-            fileName: "app/routes/scoreboard.tsx",
-            lineNumber: 114,
-            columnNumber: 13
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
-            "button",
-            {
-              className: "button",
-              onClick: (e) => {
-                var _a, _b;
-                e.preventDefault(), (_a = robRef.current) == null || _a.stepDown(10), setRobNewScore(Number((_b = robRef.current) == null ? void 0 : _b.value));
-              },
-              children: "-10"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/routes/scoreboard.tsx",
-              lineNumber: 127,
-              columnNumber: 15
-            },
-            this
-          ) }, void 0, !1, {
-            fileName: "app/routes/scoreboard.tsx",
-            lineNumber: 126,
-            columnNumber: 13
-          }, this)
-        ] }, void 0, !0, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 113,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleUpdate, children: "Update" }, void 0, !1, {
-          fileName: "app/routes/scoreboard.tsx",
-          lineNumber: 140,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/scoreboard.tsx",
-        lineNumber: 95,
-        columnNumber: 9
+        lineNumber: 100,
+        columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/scoreboard.tsx",
-      lineNumber: 77,
-      columnNumber: 7
+      lineNumber: 98,
+      columnNumber: 9
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", onClick: handleReset, children: "Reset" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Dani" }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 104,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: "Rob" }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 105,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, !0, {
       fileName: "app/routes/scoreboard.tsx",
-      lineNumber: 146,
-      columnNumber: 7
+      lineNumber: 103,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
+        state.daniScore,
+        " "
+      ] }, void 0, !0, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 109,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { children: [
+        state.robScore,
+        " "
+      ] }, void 0, !0, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 110,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/scoreboard.tsx",
+      lineNumber: 108,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("form", { ref: formRef, method: "post", onSubmit: handleReset, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+          "input",
+          {
+            ref: daniRef,
+            type: "number",
+            name: "daniNewScore",
+            onChange: (e) => setDaniNewScore(Number(e.target.value)),
+            placeholder: `${daniNewScore}`
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/routes/scoreboard.tsx",
+            lineNumber: 115,
+            columnNumber: 13
+          },
+          this
+        ),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+          "input",
+          {
+            ref: robRef,
+            type: "number",
+            name: "robNewScore",
+            onChange: (e) => setRobNewScore(Number(e.target.value)),
+            placeholder: "0"
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/routes/scoreboard.tsx",
+            lineNumber: 122,
+            columnNumber: 13
+          },
+          this
+        )
+      ] }, void 0, !0, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 114,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+          "button",
+          {
+            className: "button",
+            onClick: (e) => {
+              var _a, _b;
+              e.preventDefault(), (_a = daniRef.current) == null || _a.stepDown(10), setDaniNewScore(Number((_b = daniRef.current) == null ? void 0 : _b.value));
+            },
+            children: "-10"
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/routes/scoreboard.tsx",
+            lineNumber: 133,
+            columnNumber: 15
+          },
+          this
+        ) }, void 0, !1, {
+          fileName: "app/routes/scoreboard.tsx",
+          lineNumber: 132,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+          "button",
+          {
+            className: "button",
+            onClick: (e) => {
+              var _a, _b;
+              e.preventDefault(), (_a = robRef.current) == null || _a.stepDown(10), setRobNewScore(Number((_b = robRef.current) == null ? void 0 : _b.value));
+            },
+            children: "-10"
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/routes/scoreboard.tsx",
+            lineNumber: 145,
+            columnNumber: 15
+          },
+          this
+        ) }, void 0, !1, {
+          fileName: "app/routes/scoreboard.tsx",
+          lineNumber: 144,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 131,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "robScore", value: `${state.robScore}` }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 158,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "daniScore", value: `${state.daniScore}` }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 159,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", onClick: handleUpdate, children: "Update" }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 161,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "button", type: "submit", children: "Archive & Reset" }, void 0, !1, {
+        fileName: "app/routes/scoreboard.tsx",
+        lineNumber: 165,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/scoreboard.tsx",
+      lineNumber: 113,
+      columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/scoreboard.tsx",
-    lineNumber: 76,
+    lineNumber: 95,
+    columnNumber: 7
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/scoreboard.tsx",
+    lineNumber: 94,
     columnNumber: 5
   }, this);
 }
@@ -419,10 +438,10 @@ __export(routes_exports, {
   default: () => IndexRoute,
   links: () => links3
 });
-var import_react5 = require("@remix-run/react");
+var import_react6 = require("@remix-run/react");
 var import_jsx_dev_runtime4 = require("react/jsx-dev-runtime"), links3 = () => [{ rel: "stylesheet", href: styles_default }];
 function IndexRoute() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "content", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react5.Link, { to: "scoreboard", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("button", { className: "button", children: "Scoreboard" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "content", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react6.Link, { to: "scoreboard", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("button", { className: "button", children: "Scoreboard" }, void 0, !1, {
     fileName: "app/routes/index.tsx",
     lineNumber: 15,
     columnNumber: 11
@@ -442,7 +461,7 @@ function IndexRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "01d2486e", entry: { module: "/build/entry.client-DG5WMBNX.js", imports: ["/build/_shared/chunk-JZ4Q2KBB.js", "/build/_shared/chunk-XSU5LKHK.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-454UMAWP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-NYKU7PU2.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/scoreboard": { id: "routes/scoreboard", parentId: "root", path: "scoreboard", index: void 0, caseSensitive: void 0, module: "/build/routes/scoreboard-4CXB2KIA.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-01D2486E.js" };
+var assets_manifest_default = { version: "83de2665", entry: { module: "/build/entry.client-QVWNEAIE.js", imports: ["/build/_shared/chunk-IRSGWHCZ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-7PIIOKKP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-OTKJNQSK.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/scoreboard": { id: "routes/scoreboard", parentId: "root", path: "scoreboard", index: void 0, caseSensitive: void 0, module: "/build/routes/scoreboard-2AT6PPEN.js", imports: ["/build/_shared/chunk-5EWEWMZA.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-83DE2665.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

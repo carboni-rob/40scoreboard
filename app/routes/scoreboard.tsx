@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { LinksFunction } from "@remix-run/node";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
-
+import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/index.css";
+import { useSubmit } from "@remix-run/react";
 
 type Score = {
   daniScore: number;
@@ -27,11 +28,27 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
+export const action = async ({ request }: ActionArgs) => {
+  const form = await request.formData();
+  const robScore = form.get("robScore");
+  const daniScore = form.get("daniScore");
+
+  const data = {
+    rob: Number(robScore),
+    dani: Number(daniScore),
+  };
+
+  await db.game.create({ data });
+
+  return null;
+};
+
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
   const [daniNewScore, setDaniNewScore] = useState(0);
   const [robNewScore, setRobNewScore] = useState(0);
 
+  const submit = useSubmit();
   const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -43,7 +60,7 @@ export default function Scoreboard() {
     setState(data);
   }, [data]);
 
-  const handleUpdate = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleUpdate = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const updatedDaniScore = state?.daniScore + (daniNewScore ?? 0);
@@ -62,7 +79,7 @@ export default function Scoreboard() {
     formRef.current?.reset();
   };
 
-  const handleReset = () => {
+  const handleReset = (e: FormEvent<HTMLFormElement>) => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
 
@@ -70,6 +87,7 @@ export default function Scoreboard() {
     setDaniNewScore(0);
     setRobNewScore(0);
     formRef.current?.reset();
+    submit(e.currentTarget);
   };
 
   return (
@@ -92,7 +110,7 @@ export default function Scoreboard() {
           <h1>{state.robScore} </h1>
         </div>
 
-        <form ref={formRef}>
+        <form ref={formRef} method="post" onSubmit={handleReset}>
           <div className="row">
             <input
               ref={daniRef}
@@ -137,15 +155,18 @@ export default function Scoreboard() {
             </div>
           </div>
 
-          <button className="button" type="submit" onClick={handleUpdate}>
+          <input type="hidden" name="robScore" value={`${state.robScore}`} />
+          <input type="hidden" name="daniScore" value={`${state.daniScore}`} />
+
+          <button className="button" onClick={handleUpdate}>
             Update
+          </button>
+
+          <button className="button" type="submit">
+            Archive & Reset
           </button>
         </form>
       </div>
-
-      <button className="button" type="submit" onClick={handleReset}>
-        Reset
-      </button>
     </div>
   );
 }

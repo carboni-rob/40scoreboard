@@ -10,9 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Score {
-  id        Int      @id @default(autoincrement())
-  dani     Int
-  rob     Int
-  createdAt DateTime @default(now())
+model Game {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  rob        Int
+  dani       Int
 }
