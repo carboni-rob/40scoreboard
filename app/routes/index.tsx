@@ -14,6 +14,9 @@ export default function IndexRoute() {
         <Link to="scoreboard">
           <button className="button">Scoreboard</button>
         </Link>
+        <Link to="stats">
+          <button className="button">Stats</button>
+        </Link>
       </div>
     </div>
   );
