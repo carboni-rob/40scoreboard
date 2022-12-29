@@ -4,6 +4,11 @@
  * pages!
  */
 
+:root {
+  --color-dani: rgb(255, 99, 132);
+  --color-rob: rgb(54, 162, 235);
+}
+
 body {
   background-image: var(--gradient-background);
   padding: 2rem;
@@ -59,6 +64,18 @@ body {
 
 .hidden {
   visibility: hidden;
+}
+
+.chartContainer {
+  width: 10rem;
+}
+
+.daniColor {
+  color: var(--color-dani);
+}
+
+.robColor {
+  color: var(--color-rob);
 }
 
 h1 {
