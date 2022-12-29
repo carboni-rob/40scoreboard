@@ -168,13 +168,15 @@ export default function Scoreboard() {
         </button>
       </div>
 
-      <Form method="post" onSubmit={handleReset}>
-        <input type="hidden" name="robScore" value={robScore} />
-        <input type="hidden" name="daniScore" value={daniScore} />
-        <button className="button" type="submit">
-          Archive & Reset
-        </button>
-      </Form>
+      <div className="content">
+        <Form method="post" onSubmit={handleReset}>
+          <input type="hidden" name="robScore" value={robScore} />
+          <input type="hidden" name="daniScore" value={daniScore} />
+          <button className="button" type="submit">
+            Archive & Reset
+          </button>
+        </Form>
+      </div>
     </div>
   );
 }
