@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
-// import { db } from "~/utils/db.server";
+import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/index.css";
 import { Form, Link, useSubmit } from "@remix-run/react";
 
@@ -28,22 +28,22 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-// export const action = async ({ request }: ActionArgs) => {
-//   const form = await request.formData();
-//   const robScore = form.get("robScore");
-//   const daniScore = form.get("daniScore");
+export const action = async ({ request }: ActionArgs) => {
+  const form = await request.formData();
+  const robScore = form.get("robScore");
+  const daniScore = form.get("daniScore");
 
-//   const data = {
-//     rob: Number(robScore),
-//     dani: Number(daniScore),
-//   };
+  const data = {
+    rob: Number(robScore),
+    dani: Number(daniScore),
+  };
 
-//   console.log(data);
+  console.log(data);
 
-//   await db.game.create({ data });
+  await db.game.create({ data });
 
-//   return null;
-// };
+  return null;
+};
 
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
@@ -78,7 +78,7 @@ export default function Scoreboard() {
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
-    // submit(e.currentTarget);
+    submit(e.currentTarget);
 
     setInLocalStorage(initialState);
     setDaniNewScore(undefined);
@@ -169,7 +169,7 @@ export default function Scoreboard() {
       </div>
 
       <div className="content">
-        <Form onSubmit={handleReset}>
+        <Form method="post" onSubmit={handleReset}>
           <input type="hidden" name="robScore" value={robScore} />
           <input type="hidden" name="daniScore" value={daniScore} />
           <button className="button" type="submit">
