@@ -38,8 +38,6 @@ export const action = async ({ request }: ActionArgs) => {
     dani: Number(daniScore),
   };
 
-  console.log(data);
-
   await db.game.create({ data });
 
   return null;
