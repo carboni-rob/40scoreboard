@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
-import { db } from "~/utils/db.server";
+// import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/index.css";
 import { Form, Link, useSubmit } from "@remix-run/react";
 
