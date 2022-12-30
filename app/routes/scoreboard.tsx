@@ -169,7 +169,7 @@ export default function Scoreboard() {
       </div>
 
       <div className="content">
-        <Form method="post" onSubmit={handleReset}>
+        <Form onSubmit={handleReset}>
           <input type="hidden" name="robScore" value={robScore} />
           <input type="hidden" name="daniScore" value={daniScore} />
           <button className="button" type="submit">
