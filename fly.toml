@@ -1,4 +1,4 @@
-app = "40scoreboard-staging"
+app = "40scoreboard"
 
 [experimental]
   enable_consul = true
