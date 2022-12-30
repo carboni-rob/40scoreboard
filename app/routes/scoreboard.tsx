@@ -87,99 +87,101 @@ export default function Scoreboard() {
 
   return (
     <div className="page">
-      <h1 className="header">Scoreboard</h1>
-      <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className="content">
-        <div>
-          <div className="row">
-            <h1 className={daniDeals ? "" : "hidden"}>🃏</h1>
-            <h1 className={daniDeals ? "hidden" : ""}>🃏</h1>
-          </div>
-
-          <div className="row">
-            <h1>Dani</h1>
-            <h1>Rob</h1>
-          </div>
-
-          <div className="row">
-            <h1>{daniScore} </h1>
-            <h1>{robScore} </h1>
-          </div>
-
-          <div className="row">
-            <input
-              type="number"
-              name="daniNewScore"
-              value={daniNewScore ?? ""}
-              onChange={(e) => setDaniNewScore(Number(e.target.value))}
-              placeholder="0"
-            />
-            <input
-              type="number"
-              name="robNewScore"
-              value={robNewScore ?? ""}
-              onChange={(e) => setRobNewScore(Number(e.target.value))}
-              placeholder="0"
-            />
-          </div>
-
-          <div className="row">
-            <div className="smallRow">
-              <button
-                className="button"
-                onClick={() => {
-                  setDaniNewScore(-10);
-                }}
-              >
-                -10
-              </button>
-              <button
-                className="button"
-                onClick={() => {
-                  setDaniNewScore(100);
-                }}
-              >
-                100
-              </button>
+      <div className="container">
+        <h1 className="header">Scoreboard</h1>
+        <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className="content">
+          <div>
+            <div className="row">
+              <h1 className={daniDeals ? "" : "hidden"}>🃏</h1>
+              <h1 className={daniDeals ? "hidden" : ""}>🃏</h1>
             </div>
 
-            <div className="smallRow">
-              <button
-                className="button"
-                onClick={() => {
-                  setRobNewScore(-10);
-                }}
-              >
-                -10
-              </button>
-              <button
-                className="button"
-                onClick={() => {
-                  setRobNewScore(100);
-                }}
-              >
-                100
-              </button>
+            <div className="row">
+              <h1>Dani</h1>
+              <h1>Rob</h1>
+            </div>
+
+            <div className="row">
+              <h1>{daniScore} </h1>
+              <h1>{robScore} </h1>
+            </div>
+
+            <div className="row">
+              <input
+                type="number"
+                name="daniNewScore"
+                value={daniNewScore ?? ""}
+                onChange={(e) => setDaniNewScore(Number(e.target.value))}
+                placeholder="0"
+              />
+              <input
+                type="number"
+                name="robNewScore"
+                value={robNewScore ?? ""}
+                onChange={(e) => setRobNewScore(Number(e.target.value))}
+                placeholder="0"
+              />
+            </div>
+
+            <div className="row">
+              <div className="smallRow">
+                <button
+                  className="button"
+                  onClick={() => {
+                    setDaniNewScore(-10);
+                  }}
+                >
+                  -10
+                </button>
+                <button
+                  className="button"
+                  onClick={() => {
+                    setDaniNewScore(100);
+                  }}
+                >
+                  100
+                </button>
+              </div>
+
+              <div className="smallRow">
+                <button
+                  className="button"
+                  onClick={() => {
+                    setRobNewScore(-10);
+                  }}
+                >
+                  -10
+                </button>
+                <button
+                  className="button"
+                  onClick={() => {
+                    setRobNewScore(100);
+                  }}
+                >
+                  100
+                </button>
+              </div>
             </div>
           </div>
+
+          <button className="button" onClick={handleUpdate}>
+            Update
+          </button>
         </div>
 
-        <button className="button" onClick={handleUpdate}>
-          Update
-        </button>
-      </div>
+        <div className="content">
+          <Form method="post" onSubmit={handleReset} className="form">
+            <input type="hidden" name="robScore" value={robScore} />
+            <input type="hidden" name="daniScore" value={daniScore} />
+            <button className="button" type="submit">
+              Archive & Reset
+            </button>
+          </Form>
 
-      <div className="content">
-        <Form method="post" onSubmit={handleReset}>
-          <input type="hidden" name="robScore" value={robScore} />
-          <input type="hidden" name="daniScore" value={daniScore} />
-          <button className="button" type="submit">
-            Archive & Reset
-          </button>
-        </Form>
-
-        <Link to="/stats">
-          <button className="button">Stats</button>
-        </Link>
+          <Link to="/stats">
+            <button className="button">Stats</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
