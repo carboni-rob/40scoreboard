@@ -3,7 +3,7 @@ import { ActionArgs, LinksFunction } from "@remix-run/node";
 import { useLocalStorage } from "~/utils/useLocalStorage";
 import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/index.css";
-import { Form, Link, useSubmit } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 
 type Score = {
   daniScore: number;
@@ -49,7 +49,6 @@ export default function Scoreboard() {
   const [daniNewScore, setDaniNewScore] = useState<number | undefined>();
   const [robNewScore, setRobNewScore] = useState<number | undefined>();
 
-  const submit = useSubmit();
   const { data, setInLocalStorage } = useLocalStorage<Scores>("score", initialState);
 
   useEffect(() => {
@@ -76,7 +75,6 @@ export default function Scoreboard() {
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
-    submit(e.currentTarget);
 
     setInLocalStorage(initialState);
     setDaniNewScore(undefined);
