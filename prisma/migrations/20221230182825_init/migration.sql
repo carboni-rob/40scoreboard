@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Game" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "rob" INTEGER NOT NULL,
+    "dani" INTEGER NOT NULL
+);
