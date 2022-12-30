@@ -28,22 +28,22 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-export const action = async ({ request }: ActionArgs) => {
-  const form = await request.formData();
-  const robScore = form.get("robScore");
-  const daniScore = form.get("daniScore");
+// export const action = async ({ request }: ActionArgs) => {
+//   const form = await request.formData();
+//   const robScore = form.get("robScore");
+//   const daniScore = form.get("daniScore");
 
-  const data = {
-    rob: Number(robScore),
-    dani: Number(daniScore),
-  };
+//   const data = {
+//     rob: Number(robScore),
+//     dani: Number(daniScore),
+//   };
 
-  console.log(data);
+//   console.log(data);
 
-  await db.game.create({ data });
+//   await db.game.create({ data });
 
-  return null;
-};
+//   return null;
+// };
 
 export default function Scoreboard() {
   const [state, setState] = useState<Scores>(initialState);
