@@ -59,7 +59,7 @@ export default function Stats() {
           <h1>Wins:</h1>
           <Doughnut data={pieData} />
           <div className="row">
-            <h1 className="robColor">R0b</h1>
+            <h1 className="robColor">Rob</h1>
             <h1 className="daniColor">Dani</h1>
           </div>
           <div className="row">
