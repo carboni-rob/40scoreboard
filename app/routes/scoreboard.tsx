@@ -52,7 +52,7 @@ export default function Scoreboard() {
   const [robNewScore, setRobNewScore] = useState<number | undefined>();
 
   const submit = useSubmit();
-  const { data, setInLocalStorage } = useLocalStorage<Scores>("score");
+  const { data, setInLocalStorage } = useLocalStorage<Scores>("score", initialState);
 
   useEffect(() => {
     if (!data) return;
