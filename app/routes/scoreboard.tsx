@@ -78,7 +78,7 @@ export default function Scoreboard() {
   const handleReset = (e: FormEvent<HTMLFormElement>) => {
     const confirmReset = confirm("Are you sure you want to archive this game and reset the scores?");
     if (!confirmReset) return;
-    submit(e.currentTarget);
+    // submit(e.currentTarget);
 
     setInLocalStorage(initialState);
     setDaniNewScore(undefined);
